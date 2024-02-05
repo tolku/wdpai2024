@@ -1,0 +1,22 @@
+#plik konfiguracyjny kontenera, ktory bedzie sie skladal z dwoch obrazow,
+#ktore umiescimy w pojedynczych plikach dockerfile.
+
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app/
+    links:
+      - php
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/app/
